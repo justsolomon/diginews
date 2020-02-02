@@ -279,17 +279,13 @@ nav hr {
 }
 
 
-/* ===============
-	Top headlines
-================ */
-
-.top-headlines .results {
-	display: flex;
-}
-
+/* =================
+   Various Articles
+   Section
+================== */
 .title {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	padding: 1rem;
 	padding-right: 0;
 	padding-bottom: 0;
@@ -301,7 +297,28 @@ nav hr {
 	opacity: .7;
 }
 
-.top-headlines span {
+
+.must-see a,
+.top-headlines a {
+	color: black;
+	transition: .3s;
+}
+
+.must-see a:hover,
+.top-headlines a:hover {
+	text-decoration: underline;
+	color: blue;
+}
+
+/* ===============
+	Top headlines
+================ */
+
+.top-headlines .results {
+	display: flex;
+}
+
+.top-headlines .header-line {
 	display: inline-block;
 	background: black;
 	height: 1px;
@@ -351,11 +368,78 @@ nav hr {
 	font-size: 1.3rem;
 }
 
-.hl-link {
-	color: black;
+
+/* ===========
+    Must See
+    articles
+=========== */
+
+.must-see .results {
+	display: flex;
 }
 
-.hl-link:hover {
-	text-decoration: underline;
-	color: blue;
+.must-see .header-line {
+	display: inline-block;
+	background: black;
+	height: 1px;
+	margin: auto;
+	width: 80%;
+}
+.results-panel {
+	padding: .8rem;
+}
+
+.results .first {
+	width: 30%;
+}
+
+.results .middle {
+	width: 40%;
+}
+
+.ms-list {
+	list-style: none;
+	padding: .8rem;
+}
+
+.main-ms .ms-image {
+	width: 100%;
+	height: 200px;
+}
+
+.middle .main-ms .ms-image {
+	height: 250px;
+}
+
+.main-ms .ms-title {
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+.normal-ms {
+	margin-bottom: .6rem; 
+}
+
+.normal-ms .ms-link {
+	display: flex;
+	height: 75px;
+	overflow: hidden;
+	color: grey;
+}
+
+.normal-ms .ms-link:hover {
+	color: #ee002d;
+	text-decoration: none;
+}
+
+.normal-ms .ms-image {
+	height: 50px;
+	width: 22%;
+}
+
+.normal-ms .ms-title {
+	width: 75%;
+	font-size: .9rem;
+	margin: 0;
+	margin-left: .4rem;
 }

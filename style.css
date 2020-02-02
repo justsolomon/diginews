@@ -285,7 +285,6 @@ nav hr {
 ================== */
 .title {
 	display: flex;
-	justify-content: space-around;
 	padding: 1rem;
 	padding-right: 0;
 	padding-bottom: 0;
@@ -383,7 +382,7 @@ nav hr {
 	background: black;
 	height: 1px;
 	margin: auto;
-	width: 80%;
+	width: 83%;
 }
 .results-panel {
 	padding: .8rem;

@@ -120,7 +120,7 @@ const renderSearchResults = async function(req) {
 		header.insertAdjacentHTML(`afterend`, searchTitle);
 
 		if (document.querySelector('.load-more')) {
-		body.removeChild(document.querySelector('.load-more'));
+			body.removeChild(document.querySelector('.load-more'));
 		}
 		loadSpinner();
 		const searchData = await getSearchResults(req);
@@ -142,6 +142,9 @@ function displaySearchResults(data) {
 	let markup = `<ul class="search-result-list">`;
 
 	function loadMoreResults() {
+		if (articles.length < 20) {
+			body.removeChild(document.querySelector('.load-more'));
+		}
 		for (let i = 0; i < 11; i++) {
 			if (articles[i].urlToImage !== null) {
 				markup += `
@@ -162,6 +165,7 @@ function displaySearchResults(data) {
 				})
 			}
 		}
+		console.log(articles.length);
 	}
 
 	loadMoreResults();
@@ -203,7 +207,6 @@ function getHeadlines() {
 
 const renderHeadlines = async function() {
 	const data = await getHeadlines();
-	console.log(data);
 	displayHeadlines(data);
 }
 
@@ -225,7 +228,7 @@ function displayHeadlines(data) {
 	let markup = `
 			<div class="title">
 				<h1>Top Headlines</h1>
-				<span></span>
+				<span class="header-line"></span>
 			</div>
 			<div class="results">
 				<div class="main-hl headline">
@@ -259,22 +262,84 @@ function displayHeadlines(data) {
 
 
 /* ===========
-	Must read
+	Must See
 ============ */
 
-// const mustRead = document.querySelector('.must-read');
+const mustSeeDiv = document.querySelector('.must-see');
 
-// function getVariousArticles() {
-// 	let url = `language=en&pageSize=100&apiKey=${apikey}`;
-// 	let request = new Request(url);
-// 	return fetch(request)
-// 			.then(res => res.json())
-// 			.catch(err => console.log(err));
-// }
+const renderVariousArticles = async function() {
+	const data = await getNews();
+	console.log(data);
+	displayVariousArticles(data);
+}
 
-// const displayVariousArticles = async function() {
-// 	const data = await getNews();
-// 	console.log(data);
-// }
+renderVariousArticles();
 
-// displayVariousArticles();
+function displayVariousArticles(data) {
+	let articles = data.articles;
+	let mainItem = `
+			<div class="main-ms ms-article">
+				<a class="ms-link" target="_blank">
+					<img class="ms-image">
+					<p class="ms-title"></p>
+				</a>
+			</div>
+		`
+
+	let listItems = ``;
+	for (let i = 0; i < 6; i++) {
+		listItems += `
+			<li class="ms-article normal-ms">
+				<a class="ms-link" target="_blank">
+					<img class="ms-image">
+					<p class="ms-title"></p>
+				</a>
+			</li>
+		`;
+	}
+
+	let markup = `
+			<div class="title">
+				<h1>Must See</h1>
+				<span class="header-line"></span>
+			</div>
+			<div class="results">
+				<div class="results-panel first">
+					${mainItem}
+					<ul class="ms-list">
+						${listItems}
+					</ul>
+				</div>
+
+				<div class="results-panel middle">
+					${mainItem}
+					<ul class="ms-list">
+						${listItems}
+					</ul>
+				</div>
+
+				<div class="results-panel first">
+					${mainItem}
+					<ul class="ms-list">
+						${listItems}
+					</ul>
+				</div>
+			</div>
+		`;
+
+	mustSeeDiv.innerHTML = markup;
+	const msArticles = document.querySelectorAll('.ms-article');
+	const msLinks = document.querySelectorAll('.ms-link');
+	const msImages = document.querySelectorAll('.ms-image');
+	const msTitles = document.querySelectorAll('.ms-title');
+
+	for (let i = 0; i < msArticles.length; i++) {
+		for (let j = 0; j < articles.length; j++) {
+			if (articles[j].urlToImage !== null) {
+				msLinks[i].href = `${articles[i].url}`
+				msImages[i].src = `${articles[i].urlToImage}`;
+				msTitles[i].textContent = `${articles[i].title}`;
+			}
+		}
+	}
+}

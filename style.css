@@ -298,13 +298,15 @@ nav hr {
 
 
 .must-see a,
-.top-headlines a {
+.top-headlines a,
+.sport a {
 	color: black;
 	transition: .3s;
 }
 
 .must-see a:hover,
-.top-headlines a:hover {
+.top-headlines a:hover,
+.sport a:hover {
 	text-decoration: underline;
 	color: blue;
 }
@@ -313,11 +315,13 @@ nav hr {
 	Top headlines
 ================ */
 
-.top-headlines .results {
+.top-headlines .results,
+.sport .results {
 	display: flex;
 }
 
-.top-headlines .header-line {
+.top-headlines .header-line,
+.sport .header-line {
 	display: inline-block;
 	background: black;
 	height: 1px;
@@ -325,7 +329,8 @@ nav hr {
 	width: 75%;
 }
 
-.hl-list {
+.hl-list,
+.sp-list {
 	display: flex;
 	flex-wrap: wrap;
 	list-style: none;
@@ -334,39 +339,52 @@ nav hr {
 	padding-left: 0;
 }
 
-.main-hl {
+.main-hl,
+.main-sp {
 	width: 40%;
 	padding: 1rem;
 }
 
-.normal-hl {
+.normal-hl,
+.normal-sp {
 	width: 33.3%;
 	padding: 1rem;
 	padding-top: 0;
 }
 
-.normal-hl .hl-image {
+.normal-hl .hl-image,
+.normal-sp .sp-image {
 	height: 110px;
 	width: 100%;
 }
 
-.hl-title {
+.hl-title,
+.sp-title {
 	font-weight: bold;
 }
 
-.normal-hl .hl-title {
+.normal-hl .hl-title,
+.normal-sp .sp-title {
 	font-size: .8rem;
 }
 
-.main-hl .hl-image {
+.main-hl .hl-image,
+.main-sp .sp-image {
 	height: 270px;
 	width: 100%;
 }
 
-.main-hl .hl-title {
+.main-hl .hl-title,
+.main-sp .sp-title {
 	font-size: 1.3rem;
 }
 
+.normal-hl .hl-link,
+.normal-sp .sp-link {
+	height: 200px;
+	display: inline-block;
+	overflow: hidden;
+}
 
 /* ===========
     Must See
@@ -390,10 +408,12 @@ nav hr {
 
 .results .first {
 	width: 30%;
+	font-size: 1rem;
 }
 
 .results .middle {
 	width: 40%;
+	font-size: 1.2rem;
 }
 
 .ms-list {
@@ -411,7 +431,6 @@ nav hr {
 }
 
 .main-ms .ms-title {
-	font-size: 1.2rem;
 	font-weight: bold;
 }
 

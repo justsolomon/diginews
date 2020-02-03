@@ -228,7 +228,7 @@ function displayHeadlines(data) {
 	let markup = `
 			<div class="title">
 				<h1>Top Headlines</h1>
-				<hlan class="header-line"></hlan>
+				<span class="header-line"></span>
 			</div>
 			<div class="results">
 				<div class="main-hl headline">

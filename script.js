@@ -228,7 +228,7 @@ function displayHeadlines(data) {
 	let markup = `
 			<div class="title">
 				<h1>Top Headlines</h1>
-				<span class="header-line"></span>
+				<hlan class="header-line"></hlan>
 			</div>
 			<div class="results">
 				<div class="main-hl headline">
@@ -244,7 +244,7 @@ function displayHeadlines(data) {
 		`;
 
 	headlineDiv.innerHTML = markup;
-	let headlines = document.querySelectorAll('.headline');
+	const headlines = document.querySelectorAll('.headline');
 	const hlImages = document.querySelectorAll('.hl-image');
 	const hlTitles = document.querySelectorAll('.hl-title');
 	const hlLinks = document.querySelectorAll('.hl-link');
@@ -269,7 +269,6 @@ const mustSeeDiv = document.querySelector('.must-see');
 
 const renderVariousArticles = async function() {
 	const data = await getNews();
-	console.log(data);
 	displayVariousArticles(data);
 }
 
@@ -339,6 +338,77 @@ function displayVariousArticles(data) {
 				msLinks[i].href = `${articles[i].url}`
 				msImages[i].src = `${articles[i].urlToImage}`;
 				msTitles[i].textContent = `${articles[i].title}`;
+			}
+		}
+	}
+}
+
+
+/* =============
+	Home sports
+============= */
+
+const sportsDiv = document.querySelector('.sport')
+
+function getSportNews() {
+	let url = `${headUrlRoot}country=ng&category=sports&pageSize=100&apiKey=${apikey}`
+	let request = new Request(url);
+	return fetch(request)
+			.then(res => res.json())
+			.catch(err => console.log(err));
+}
+
+const renderSportNews = async function() {
+	const data = await getSportNews();
+	console.log(data);
+	displaySportNews(data);
+}
+
+renderSportNews();
+
+function displaySportNews(data) {
+	let articles = data.articles;
+	let listItems = ``;
+	for (let i = 0; i < 6; i++) {
+		listItems += `
+			<li class="sp-headline normal-sp">
+				<a class="sp-link" target="_blank">
+					<img class="sp-image">
+					<p class="sp-title"></p>
+				</a>
+			</li>
+		`;
+	}
+	let markup = `
+			<div class="title">
+				<h1>Sports</h1>
+				<span class="header-line"></span>
+			</div>
+			<div class="results">
+				<div class="main-sp sp-headline">
+					<a class="sp-link" target="_blank">
+						<img class="sp-image">
+						<p class="sp-title"></p>
+					</a>
+				</div>
+				<ul class="sp-list">
+					${listItems}
+				</ul>
+			</div>
+		`;
+
+	sportsDiv.innerHTML = markup;
+	const headlines = document.querySelectorAll('.sp-headline');
+	const spImages = document.querySelectorAll('.sp-image');
+	const spTitles = document.querySelectorAll('.sp-title');
+	const spLinks = document.querySelectorAll('.sp-link');
+
+	for (let i = 0; i < headlines.length; i++) {
+		for (let j = 0; j < articles.length; j++) {
+			if (articles[j].urlToImage !== null) {
+				spLinks[i].href = `${articles[i].url}`
+				spImages[i].src = `${articles[i].urlToImage}`;
+				spTitles[i].textContent = `${articles[i].title}`;
 			}
 		}
 	}

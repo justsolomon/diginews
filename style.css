@@ -53,10 +53,11 @@ a {
 }
 
 .top-nav .app-name {
-	font-size: 2.2rem;
 	margin-left: 0;
-	font-weight: 600;
-	font-style: italic;
+}
+
+.app-name img {
+	height: 50px;
 }
 
 .top-nav .api-link {

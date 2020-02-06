@@ -1,3 +1,3 @@
 # diginews
 
-Not available yet.
+Still in production.

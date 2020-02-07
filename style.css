@@ -10,6 +10,7 @@ html {
 
 body {
 	margin: 0;
+	font-family: Helvetica, sans-serif;
 }
 
 main {
@@ -82,9 +83,15 @@ a {
 	transition: .3s;
 }
 
-.nav-bar li:hover {
+.nav-bar li:hover,
+.home a:hover {
 	color: black;
 	text-decoration: underline;
+}
+
+.home a {
+	color: grey;
+	transition: .3s;
 }
 
 .search {
@@ -168,6 +175,91 @@ nav hr {
 @keyframes fade {
   from {opacity: .4}
   to {opacity: 1}
+}
+
+
+/* ==============
+	footer styles
+=============== */
+
+footer {
+	background-color: #4c4c4c;
+	color: white;
+	padding: 1.5rem;
+}
+
+.main-footer-area {
+	padding-top: 1rem;
+}
+
+.footer-heading {
+	font-weight: 900;
+	font-size: 2rem;
+	padding: 0;
+	margin: 0;
+}
+
+.footer-sections-area {
+	margin-top: 2rem; 
+}
+
+.footer-section-list {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	padding: 0;
+	margin: 0;
+}
+
+.footer-section {
+	width: 25%;
+	padding: 0 0 .8rem 2rem;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.footer-section:hover {
+	text-decoration: underline;
+}
+
+.social-media {
+	display: flex;
+}
+
+.social-media p {
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+.media-link {
+	display: inline-block;
+	padding-left: 1rem;
+}
+
+.media-link img:hover {
+	background-color: #fff;
+}
+
+.media-link img {
+	height: 55px;
+}
+
+.footer-attribution-area {
+	display: flex;
+	justify-content: space-between;
+}
+
+.footer-attribution-area p {
+	margin-bottom: 0;
+}
+
+.footer-attribution-area a {
+	color: white;
+}
+
+.footer-attribution-area a:hover {
+	text-decoration: underline;
 }
 
 /* ================

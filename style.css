@@ -83,9 +83,15 @@ a {
 	transition: .3s;
 }
 
-.nav-bar li:hover {
+.nav-bar li:hover,
+.home a:hover {
 	color: black;
 	text-decoration: underline;
+}
+
+.home a {
+	color: grey;
+	transition: .3s;
 }
 
 .search {

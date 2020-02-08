@@ -84,12 +84,12 @@ a {
 }
 
 .nav-bar li:hover,
-.home a:hover {
+.nav-bar .home a:hover {
 	color: black;
 	text-decoration: underline;
 }
 
-.home a {
+.nav-bar .home a {
 	color: grey;
 	transition: .3s;
 }

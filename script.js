@@ -124,7 +124,11 @@ const renderSearchResults = async function(req) {
 		}
 		loadSpinner();
 		const searchData = await getSearchResults(req);
-		displaySearchResults(searchData);
+		if (searchData.articles == false) {
+			main.innerHTML = ''
+			document.querySelector('.search-title').textContent = `Sorry, no results were found for ${req}. Please try searching with another term.`
+		}
+		else displaySearchResults(searchData);
 	}
 }
 	

@@ -2,6 +2,14 @@ const body = document.querySelector('body');
 const main = document.querySelector('main');
 const header = document.querySelector('header');
 
+//helper function to filter articles
+
+function filterArticles(articles) {
+	return articles.filter(article => {
+				return article.urlToImage !== null;
+			})
+}
+
 //adding load spinner
 
 function loadSpinner() {
@@ -51,21 +59,13 @@ const content = document.querySelectorAll('.content');
 const links = document.querySelectorAll('.slide-link');
 
 function styleSlides(news) {
-	let articles = news.articles;
+	let articles = filterArticles(news.articles);
 	for (let i = 0; i < images.length; i++) {
-		for (let j = 0; j < articles.length; j++) {
-			if (articles[j].urlToImage !== null) {
-				images[i].src = `${articles[i].urlToImage}`;
-				links[i].href = `${articles[i].url}`;
-				links[i].target = `_blank`;
-				content[i].textContent = `${articles[i].title}`;
-				document.querySelector('.slideshow-container').style.display = 'block';
-			} else {
-				articles = articles.filter(article => {
-					return article !== articles[j]
-				})
-			}
-		}
+		images[i].src = `${articles[i].urlToImage}`;
+		links[i].href = `${articles[i].url}`;
+		links[i].target = `_blank`;
+		content[i].textContent = `${articles[i].title}`;
+		document.querySelector('.slideshow-container').style.display = 'block';
 	}
 }
 
@@ -130,7 +130,7 @@ const renderSearchResults = async function(req) {
 	
 
 function displaySearchResults(data) {
-	let articles = data.articles;
+	let articles = filterArticles(data.articles);
 
 	if (document.querySelector('.load-more')) {
 		body.removeChild(document.querySelector('.load-more'));
@@ -146,26 +146,23 @@ function displaySearchResults(data) {
 			body.removeChild(document.querySelector('.load-more'));
 		}
 		for (let i = 0; i < 11; i++) {
-			if (articles[i].urlToImage !== null) {
-				markup += `
-					<li class="search-result">
-						<p>${articles[i].publishedAt.substring(0, 10)}</p>
-						<a href="${articles[i].url}" target="_blank" class="search-result-link">
-							<img src="${articles[i].urlToImage}">
-							<div>
-								<h1>${articles[i].title}</h1>
-								<p>${articles[i].description}</p>
-							</div>
-						</a>
-					</li>
-					<hr>
+			markup += `
+				<li class="search-result">
+					<p>${articles[i].publishedAt.substring(0, 10)}</p>
+					<a href="${articles[i].url}" target="_blank" class="search-result-link">
+						<img src="${articles[i].urlToImage}">
+						<div>
+							<h1>${articles[i].title}</h1>
+							<p>${articles[i].description}</p>
+						</div>
+					</a>
+				</li>
+				<hr>
 				`
-				articles = articles.filter(article => {
-					return article !== articles[i];
-				})
-			}
+			articles = articles.filter(article => {
+				return article !== articles[i];
+			})
 		}
-		console.log(articles.length);
 	}
 
 	loadMoreResults();
@@ -213,7 +210,7 @@ const renderHeadlines = async function() {
 renderHeadlines();
 
 function displayHeadlines(data) {
-	let articles = data.articles;
+	let articles = filterArticles(data.articles);
 	let listItems = ``;
 	for (let i = 0; i < 6; i++) {
 		listItems += `
@@ -250,13 +247,9 @@ function displayHeadlines(data) {
 	const hlLinks = document.querySelectorAll('.hl-link');
 
 	for (let i = 0; i < headlines.length; i++) {
-		for (let j = 0; j < articles.length; j++) {
-			if (articles[j].urlToImage !== null) {
-				hlLinks[i].href = `${articles[i].url}`
-				hlImages[i].src = `${articles[i].urlToImage}`;
-				hlTitles[i].textContent = `${articles[i].title}`;
-			}
-		}
+		hlLinks[i].href = `${articles[i].url}`
+		hlImages[i].src = `${articles[i].urlToImage}`;
+		hlTitles[i].textContent = `${articles[i].title}`;
 	}
 }
 
@@ -275,7 +268,7 @@ const renderVariousArticles = async function() {
 renderVariousArticles();
 
 function displayVariousArticles(data) {
-	let articles = data.articles;
+	let articles = filterArticles(data.articles);
 	let mainItem = `
 			<div class="main-ms ms-article">
 				<a class="ms-link" target="_blank">
@@ -333,13 +326,9 @@ function displayVariousArticles(data) {
 	const msTitles = document.querySelectorAll('.ms-title');
 
 	for (let i = 0; i < msArticles.length; i++) {
-		for (let j = 0; j < articles.length; j++) {
-			if (articles[j].urlToImage !== null) {
-				msLinks[i].href = `${articles[i].url}`
-				msImages[i].src = `${articles[i].urlToImage}`;
-				msTitles[i].textContent = `${articles[i].title}`;
-			}
-		}
+		msLinks[i].href = `${articles[i].url}`
+		msImages[i].src = `${articles[i].urlToImage}`;
+		msTitles[i].textContent = `${articles[i].title}`;
 	}
 }
 
@@ -367,7 +356,7 @@ const renderSportNews = async function() {
 renderSportNews();
 
 function displaySportNews(data) {
-	let articles = data.articles;
+	let articles = filterArticles(data.articles)
 	let listItems = ``;
 	for (let i = 0; i < 6; i++) {
 		listItems += `
@@ -404,12 +393,8 @@ function displaySportNews(data) {
 	const spLinks = document.querySelectorAll('.sp-link');
 
 	for (let i = 0; i < headlines.length; i++) {
-		for (let j = 0; j < articles.length; j++) {
-			if (articles[j].urlToImage !== null) {
-				spLinks[i].href = `${articles[i].url}`
-				spImages[i].src = `${articles[i].urlToImage}`;
-				spTitles[i].textContent = `${articles[i].title}`;
-			}
-		}
+		spLinks[i].href = `${articles[i].url}`
+		spImages[i].src = `${articles[i].urlToImage}`;
+		spTitles[i].textContent = `${articles[i].title}`
 	}
 }

@@ -14,7 +14,7 @@ function filterArticles(articles) {
 
 function loadSpinner() {
 	main.innerHTML = '';
-	let image = `<img class="loader-icon" src="loader.gif" alt="loader icon">`
+	let image = `<img class="loader-icon" src="assets/loader.gif" alt="loader icon">`
 	main.innerHTML = image;
 }
 
